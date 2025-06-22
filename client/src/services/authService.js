@@ -1,34 +1,45 @@
 import axiosInstance from "../utils/axiosInst";
 import useAuthStore from "../store/authStore";
+import { toast } from "react-hot-toast";
 
 export const register = async (userData) => {
-  const loginUser = useAuthStore.getState().login;
-  try {
-    const response = await axiosInstance.post('/api/auth/register', userData);
-    if (response.data) {
-      loginUser(response.data.user, response.data.token);
-      localStorage.setItem('token', response.data.token);
+  await toast.promise(
+    async () => {
+      const loginUser = useAuthStore.getState().login;
+        const response = await axiosInstance.post('/api/auth/register', userData);
+        if (response.data) {
+          loginUser(response.data.user, response.data.token);
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('refreshToken', response.data.refreshToken);
+        }
+        return response.data;
+    },
+    {
+      loading: "Registering...",
+      success: "Registration successful!",
+      error: (err) => `Error registering: ${err.response?.data?.message || err.message}`
     }
-    return response.data;
-  } catch (error) {
-    console.error('Registration error:', error);
-    throw error;
-  }
+  );
 };
 
 export const login = async (credentials) => {
   const loginUser = useAuthStore.getState().login;
-  try {
-    const response = await axiosInstance.post('/api/auth/login', credentials);
-    if (response.data) {
-      loginUser(response.data.user, response.data.token);
-      localStorage.setItem('token', response.data.token);
+  await toast.promise(
+    async () => {
+      const response = await axiosInstance.post('/api/auth/login', credentials);
+      if (response.data) {
+        loginUser(response.data.user, response.data.token);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+      }
+      return response.data;
+    },
+    {
+      loading: "Logging in...",
+      success: "Login successful!",
+      error: (err) => `Error logging in: ${err.response?.data?.message || err.message}`
     }
-    return response.data;
-  } catch (error) {
-    console.error('Login error:', error);
-    throw error;
-  }
+  );
 };
 
 export const logout = () => {
@@ -57,21 +68,43 @@ export const getCurrentUser = async () => {
 };
 
 export const forgetPassword = async (email) => {
-  try {
-    const response = await axiosInstance.post('/api/auth/forget-password', { email });
-    return response.data;
-  } catch (error) {
-    console.error('Forget password error:', error);
-    throw error;
-  }
+  await toast.promise(
+    async () => {
+      const response = await axiosInstance.post('/api/auth/forget-password', { email });
+      return response.data;
+    },
+    {
+      loading: "Sending reset link...",
+      success: "Reset link sent to your email!",
+      error: (err) => `Error sending reset link: ${err.response?.data?.message || err.message}`
+    }
+  );
 };
 
 export const resetPassword = async (token, newPassword) => {
-  try {
-    const response = await axiosInstance.post(`/api/auth/reset-password/${token}`, { password: newPassword });
-    return response.data;
-  } catch (error) {
-    console.error('Reset password error:', error);
-    throw error;
-  }
+  await toast.promise(
+    async () => {
+      const response = await axiosInstance.post(`/api/auth/reset-password/${token}`, { password: newPassword });
+      return response.data;
+    },
+    {
+      loading: "Resetting password...",
+      success: "Password reset successfully!",
+      error: (err) => `Error resetting password: ${err.response?.data?.message || err.message}`
+    }
+  );
+};
+
+export const updatePassword = async (currentPassword, newPassword) => {
+  await toast.promise(
+    async () => {
+      const response = await axiosInstance.put('/api/auth/update-password', { currentPassword, newPassword });
+      return response.data;
+    },
+    {
+      loading: "Updating password...",
+      success: "Password updated successfully!",
+      error: (err) => `Error updating password: ${err.response?.data?.message || err.message}`
+    }
+  );
 };
