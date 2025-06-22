@@ -31,7 +31,7 @@ const Login = () => {
     try {
       setLoading(true);
       await login(formData);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     } finally {
@@ -79,6 +79,10 @@ const Login = () => {
       
       <div className="mt-4 text-center">
         Don't have an account? <Link to="/register" className="text-blue-500 hover:text-blue-700">Register</Link>
+      </div>
+      <span className="text-center block mt-2 text-sm text-gray-600">or</span>
+      <div className="mt-4 text-center">
+        <Link to="/forgot-password" className="text-blue-500 hover:text-blue-700">Forget Password</Link>
       </div>
     </div>
   );
