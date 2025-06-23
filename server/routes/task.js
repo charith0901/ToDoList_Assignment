@@ -7,5 +7,8 @@ taskRoutes.get("/", protect, getTasks);
 taskRoutes.post("/", protect, createTask);
 taskRoutes.put("/:id", protect, updateTask);
 taskRoutes.delete("/:id", protect, deleteTask);
+taskRoutes.get("/test", (req, res) => {
+  res.send("Task route is working!");
+});
 
 export default taskRoutes;
