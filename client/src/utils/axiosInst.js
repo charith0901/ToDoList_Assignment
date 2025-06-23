@@ -26,7 +26,38 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error) => {
+        const originalRequest = error.config;
+        if (
+            error.response &&
+            error.response.status === 401 &&
+            originalRequest &&
+            !originalRequest._retry &&
+            originalRequest.url !== `${import.meta.env.VITE_API_URL}/auth/login`
+        ) {
+            originalRequest._retry = true;
+            try {
+                console.log("here we go");
+                const refreshToken = localStorage.getItem('refreshToken');
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_URL}/api/auth/refresh`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${refreshToken}`,
+                        },
+                    }
+                );
+                const { token, refreshToken: newRefreshToken } = response.data;
+                localStorage.setItem('token', token);
+                localStorage.setItem('refreshToken', newRefreshToken);
+                originalRequest.headers['Authorization'] = `Bearer ${token}`;
+                return axios(originalRequest);
+            } catch (refreshError) {
+                console.error("Error refreshing token:", refreshError);
+                toast.error("Session expired. Please log in again.");
+                return Promise.reject(refreshError);
+            }
+        }
         // Show error toast if response got error
         const message =
             error.response?.data?.message ||

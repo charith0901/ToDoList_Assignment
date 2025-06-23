@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  completed: { type: Boolean, default: false },
+  dueDate: { type: Date, required: true },
+  isCompleted: { type: Boolean, default: false },
+  priority: { type: String, enum: ["low", "medium", "high"], default: "medium" },
+  tags: [{ type: String }],
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
 });
 
