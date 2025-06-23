@@ -6,9 +6,7 @@ import taskRoutes from '../routes/task.js';
 const app = express();
 
 //middlewares
-app.use(cors({
-  origin: ['https://todolistassignment-production.up.railway.app', 'http://localhost:5173']
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
