@@ -1,21 +1,26 @@
 import http from 'http';
-import {config} from "dotenv";
+import { config } from 'dotenv';
 import app from './app.js';
 import connect from '../config/db.js';
 
-// Load environment variables from .env file
+// Load env vars
 if (process.env.NODE_ENV !== 'production') {
   config();
 }
 
-const server = http.createServer(app);
-
-server.listen(process.env.PORT || 3000, () => {
+(async () => {
   try {
-    connect();
+    await connect(); 
     console.log('Connected to MongoDB');
-    console.log(`Server is running on port ${process.env.PORT || 3000}`);
+
+    const server = http.createServer(app);
+
+    const PORT = process.env.PORT || 3000;
+    server.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
+    process.exit(1); 
   }
-});
+})();
