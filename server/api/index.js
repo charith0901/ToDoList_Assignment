@@ -10,17 +10,16 @@ if (process.env.NODE_ENV !== 'production') {
 
 (async () => {
   try {
-    await connect(); 
+    await connect();
     console.log('Connected to MongoDB');
 
     const server = http.createServer(app);
-
     const PORT = process.env.PORT || 3000;
     server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
-    process.exit(1); 
+    process.exit(1);
   }
 })();

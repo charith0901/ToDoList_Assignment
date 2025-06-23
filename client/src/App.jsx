@@ -10,6 +10,7 @@ import Profile from './components/dashboard/profile';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
 import OverDueTasks from './components/task/overDue';
+import Welcome from './components/welcome/welcome';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/" element={<Welcome/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
