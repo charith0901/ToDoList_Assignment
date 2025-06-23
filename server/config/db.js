@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 mongoose.set('strictQuery', true);
 
-const connect = () => {
+const connect = async () => {
     try {
-        mongoose.connect(process.env.MONGODB_URI, {
+        await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -11,6 +11,6 @@ const connect = () => {
     } catch (error) {
         console.error('MongoDB connection failed:', error);
         throw new Error('MongoDB connection failed');
-    }   
+    }
 }
 export default connect;
