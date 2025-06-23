@@ -7,8 +7,7 @@ const app = express();
 
 //middlewares
 app.use(cors({
-  origin: ['https://todolistassignment-production.up.railway.app', 'http://localhost:5173'], 
-  credentials: true, 
+  origin: ['https://todolistassignment-production.up.railway.app', 'http://localhost:5173']
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
