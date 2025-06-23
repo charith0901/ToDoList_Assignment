@@ -9,6 +9,7 @@ import OverView from './components/dashboard/overView';
 import Profile from './components/dashboard/profile';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ResetPassword from './components/auth/ResetPassword';
+import OverDueTasks from './components/task/overDue';
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
               <Route path='/dashboard' element={<OverView />} />
               <Route path='/profile' element={<Profile />} />
               <Route path='/tasks' element={<TaskManager />} />
+              <Route path='/overdue-tasks' element={<OverDueTasks />} />
             </Route>
           </Route>
         </Routes>

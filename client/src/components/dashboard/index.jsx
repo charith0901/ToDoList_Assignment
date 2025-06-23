@@ -106,8 +106,8 @@ const Dashboard = () => {
                                 key={item.id}
                                 to={item.link}
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive
-                                        ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 shadow-sm border-l-4 border-blue-500'
-                                        : 'hover:bg-gray-50 text-gray-700 hover:text-gray-900'
+                                    ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 shadow-sm border-l-4 border-blue-500'
+                                    : 'hover:bg-gray-50 text-gray-700 hover:text-gray-900'
                                     }`}
                             >
                                 <Icon
