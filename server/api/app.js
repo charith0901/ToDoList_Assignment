@@ -15,6 +15,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to the TODOLIST API!');
 });
 
+app.get('/api', (req, res) => {
+  res.send('Welcome to the TODOLIST API! This is the API for managing your tasks.');
+});
+
 //routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
