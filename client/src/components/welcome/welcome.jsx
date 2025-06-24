@@ -26,9 +26,6 @@ const Welcome = () => {
         <div className="text-center">
           <div className="bg-white rounded-lg p-8 shadow-lg max-w-md mx-auto">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Ready to Get Started?</h2>
-            <p className="text-gray-600 mb-6">
-              Join thousands of users who have already transformed their productivity with TaskMaster.
-            </p>
             <button
               onClick={handleGetStarted}
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center mx-auto"
