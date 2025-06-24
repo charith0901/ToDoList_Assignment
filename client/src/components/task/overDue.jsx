@@ -24,7 +24,7 @@ const OverDueTasks = () => {
 
     useEffect(() => {
         fetchOverdueTasks();
-    }, []);    const handleUpdateTaskStatus = async (taskId) => {
+    }, []); const handleUpdateTaskStatus = async (taskId) => {
         try {
             await updateTaskStatus(taskId);
             fetchOverdueTasks();
@@ -32,7 +32,7 @@ const OverDueTasks = () => {
             console.error("Error updating task status:", error);
         }
     };
-    
+
     const handleDeleteTask = async (taskId) => {
         try {
             await deleteTask(taskId);
@@ -69,7 +69,7 @@ const OverDueTasks = () => {
                         </svg>
                         <p className="text-red-700">{error}</p>
                     </div>
-                    <button 
+                    <button
                         onClick={fetchOverdueTasks}
                         className="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors"
                     >
@@ -100,6 +100,7 @@ const OverDueTasks = () => {
                         <div
                             key={task.id || index}
                             className="group bg-white shadow-sm hover:shadow-md rounded-lg border border-red-200 hover:border-red-300 transition-all duration-200 overflow-hidden"
+                            title={task.description}
                         >
                             <div className="bg-red-50 px-4 py-2 border-b border-red-100">
                                 <span className="text-sm font-medium text-red-600">

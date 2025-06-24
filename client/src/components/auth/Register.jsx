@@ -75,7 +75,7 @@ const Register = () => {
             className="w-full p-2 border rounded"
           />
         </div>
-        
+
         <div className="mb-4">
           <label className="block mb-2 font-medium">Password</label>
           <input
@@ -86,6 +86,16 @@ const Register = () => {
             className="w-full p-2 border rounded"
           />
         </div>
+        {formData.password !== '' && (
+          <div className="mb-2 text-xs text-gray-600 bg-gray-50 p-2 rounded">
+            <ul className="list-disc pl-5">
+              <li>Username: 3-30 characters, letters, numbers, underscores only</li>
+              <li>
+                Password: at least 6 characters, must contain at least one uppercase letter, one lowercase letter, and one number
+              </li>
+            </ul>
+          </div>
+        )}
         
         <div className="mb-4">
           <label className="block mb-2 font-medium">Confirm Password</label>

@@ -96,7 +96,7 @@ const TaskManager = () => {
                 <div className={`${isOpenUpdatePanel ? 'lg:w-2/3' : 'w-full'} transition-all duration-300`}>            <div className="flex items-center justify-between mb-6">
                     {!showAddForm && (
                         <button
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
                             onClick={() => setShowAddForm(!showAddForm)}
                             disabled={loading}
                         >
@@ -107,7 +107,7 @@ const TaskManager = () => {
 
                     {/* Add/Edit Task Form */}
                     {showAddForm && (
-                        <CreateTask onClose={() => { setShowAddForm(false) }} />
+                        <CreateTask onClose={() => { setShowAddForm(false);loadTasks(); }} />
                     )}
 
 

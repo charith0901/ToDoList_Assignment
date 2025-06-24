@@ -2,13 +2,11 @@ import Task from "../models/Task.js";
 
 export const createTask = async (req, res) => {
     try {
-        const { title, description, dueDate, priority, tags } = req.body;
+        const { title, description, dueDate } = req.body;
         const task = new Task({
             title,
             description,
             dueDate: new Date(dueDate),
-            priority,
-            tags,
             userId: req.user._id
         });
         const createdTask = await task.save();
@@ -27,7 +25,7 @@ export const getTasks = async (req, res) => {
 }
 export const updateTask = async (req, res) => {
     try {
-        const { title, description, dueDate, priority, tags } = req.body;
+        const { title, description, dueDate } = req.body;
         const task = await Task.findById(req.params.id);
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
@@ -35,8 +33,6 @@ export const updateTask = async (req, res) => {
         task.title = title;
         task.description = description;
         task.dueDate = dueDate;
-        task.priority = priority;
-        task.tags = tags;
         const updatedTask = await task.save();
         res.status(200).json(updatedTask);
     } catch (error) {
