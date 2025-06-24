@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom'
 import { forgetPassword } from '../../services/authService';
+import toast from 'react-hot-toast';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage('');
-    setError('');
     setLoading(true);
 
     try {
-      const data = await forgetPassword(email);
-      setMessage(data.message);
+      await forgetPassword(email);
       setEmail('');
     } catch (err) {
-      setError(err.response?.data?.error || 'Something went wrong');
+      toast.error(err.response?.data?.message || 'Failed to send reset link');
     } finally {
       setLoading(false);
     }
@@ -32,16 +28,6 @@ const ForgotPassword = () => {
         <p className="mt-2 text-center text-sm text-gray-600">
           Enter your email to receive a password reset link.
         </p>
-        {message && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-2 text-center animate-fade-in">
-            {message}
-          </div>
-        )}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-2 text-center animate-fade-in">
-            {error}
-          </div>
-        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -65,7 +51,7 @@ const ForgotPassword = () => {
             className={`w-full mt-4 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
               loading || !email
                 ? 'bg-red-300 cursor-not-allowed'
-                : 'bg-green-600 hover:bg-indigo-700'
+                : 'bg-green-600 hover:bg-green-700'
             } transition`}
           >
             {loading ? (

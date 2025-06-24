@@ -105,7 +105,7 @@ const OverView = () => {
                     {/* Today's Tasks */}
                     <div className="lg:col-span-2">
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
+                            <div className="bg-gradient-to-r from-green-500 to-green-300 px-6 py-4">
                                 <div className="flex items-center space-x-3">
                                     <Calendar className="w-6 h-6 text-white" />
                                     <h3 className="text-xl font-semibold text-white">Today's Tasks</h3>
@@ -118,6 +118,7 @@ const OverView = () => {
                                             <div
                                                 key={index}
                                                 className="group flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 rounded-lg transition-colors duration-200 border border-transparent hover:border-blue-200"
+                                                title={task.description}
                                             >
                                                 <TaskCard
                                                     task={task}
@@ -163,14 +164,6 @@ const OverView = () => {
                                 {showCreateTask && (
                                     <CreateTask onClose={() => {setShowCreateTask(false);fetchOverviewTasks();}} />
                                 )}
-
-                                <button
-                                    onClick={() => {/* Export functionality */ }}
-                                    className="w-full group flex items-center justify-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-105"
-                                >
-                                    <Download className="w-5 h-5 mr-2" />
-                                    Export Data
-                                </button>
                             </div>
                         </div>
 

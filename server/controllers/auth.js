@@ -92,7 +92,17 @@ export const forgetPassword = async (req, res) => {
     await transporter.sendMail({
       to: user.email,
       subject: "Password Reset",
-      html: `<p>You requested a password reset</p><p>Click this <a href="${resetLink}">link</a> to reset your password</p>`
+      html: `
+      <div style="font-family: Arial, sans-serif; background: #f9f9f9; padding: 32px;">
+        <div style="max-width: 480px; margin: auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 32px;">
+        <h2 style="color: #333;">Password Reset Request</h2>
+        <p style="color: #555;">You requested a password reset for your account.</p>
+        <p style="color: #555;">Click the button below to reset your password:</p>
+        <a href="${resetLink}" style="display: inline-block; margin: 24px 0; padding: 12px 28px; background: #007bff; color: #fff; text-decoration: none; border-radius: 4px; font-size: 16px;">Reset Password</a>
+        <p style="color: #888; font-size: 13px;">If you did not request this, please ignore this email.</p>
+        </div>
+      </div>
+      `
     });
     console.log("Password reset email sent to:", user.email);
 

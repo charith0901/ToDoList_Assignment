@@ -4,15 +4,22 @@ import { updateTask } from '../../services/taskService';
 const UpdateTask = ({ task, onSuccess, onCancel }) => {
     const [title, setTitle] = useState(task ? task.title : '');
     const [description, setDescription] = useState(task ? task.description : '');
-    const [dueDate, setDueDate] = useState(task ? task.dueDate ? task.dueDate.split('T')[0] : '' : '');
+    const [dueDate, setDueDate] = useState(task ? task.dueDate ? new Date(task.dueDate) : '' : '');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-
+    const formatDateForInput = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        const offset = date.getTimezoneOffset();
+        const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+        return localDate.toISOString().slice(0, 16);
+    };
+    
     useEffect(() => {
         if (task) {
             setTitle(task.title);
             setDescription(task.description);
-            setDueDate(task.dueDate ? task.dueDate.split('T')[0] : '');
+            setDueDate(task.dueDate ? formatDateForInput(task.dueDate) : '');
         }
     }, [task]);
 
@@ -88,7 +95,7 @@ const UpdateTask = ({ task, onSuccess, onCancel }) => {
                         Due Date
                     </label>
                     <input
-                        type="date"
+                        type="datetime-local"
                         value={dueDate}
                         onChange={e => setDueDate(e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -99,7 +106,7 @@ const UpdateTask = ({ task, onSuccess, onCancel }) => {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                        className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
                     >
                         {loading ? 'Updating...' : 'Update Task'}
                     </button>

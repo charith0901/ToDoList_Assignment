@@ -73,7 +73,7 @@ const Dashboard = () => {
                 <div className="p-6 border-b border-gray-100">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                            <h1 className="text-xl font-bold text-gray-800">ToDo App</h1>
+                            <h1 className="text-xl font-bold text-green-600">ToDo <span className="font-extrabold text-gray-700">App</span></h1>
                         </div>
                         <button
                             onClick={toggleSidebar}
@@ -106,13 +106,13 @@ const Dashboard = () => {
                                 key={item.id}
                                 to={item.link}
                                 className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 group ${isActive
-                                    ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 shadow-sm border-l-4 border-blue-500'
+                                    ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-green-600 shadow-sm border-l-4 border-green-500'
                                     : 'hover:bg-gray-50 text-gray-700 hover:text-gray-900'
                                     }`}
                             >
                                 <Icon
                                     size={20}
-                                    className={`transition-colors ${isActive ? 'text-blue-600' : 'text-gray-500 group-hover:text-gray-700'
+                                    className={`transition-colors ${isActive ? 'text-green-600' : 'text-gray-500 group-hover:text-gray-700'
                                         }`}
                                 />
                                 <span className="font-medium">{item.label}</span>
@@ -150,7 +150,7 @@ const Dashboard = () => {
                                     <Menu size={20} className="text-gray-600" />
                                 </button>
                                 <div>
-                                    <h2 className="text-2xl font-bold text-gray-900">{getCurrentPageTitle()}</h2>
+                                    <h2 className="text-2xl font-bold text-green-600">{getCurrentPageTitle()}</h2>
 
                                 </div>
                             </div>
